@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./assets/css/style.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/>
+    <title>The Quiz</title>
+</head>
+<body>
+   
+    <div class="start">
+        <button id="start-btn">Start Quiz</button>
+    </div>
+
+    <section class="info-container">
+        <div class="quiz-info">
+            <h2>RULES</h2>
+        </div>
+
+        <div class="list">
+            <li class="info">You will only have one minute to complete the quiz.</li>
+            <li class="info">You only get one attempt at each question and incorrect answers will subtract from the remaining time</li>
+            <li class="info">The most important rule. HAVE FUN!!!!!</li>
+        </div>
+
+        <div class="buttons">
+            <button class="exit">Leave Quiz</button>
+            <button class="begin">Continue</button>
+        </div>
+    </section>
+
+    <main class="quiz">
+        <header>
+            <div class="title">It's the Quiz!</div>
+            <div class="timer">
+                <div class="time-left">Remaining Time</div>
+                <div class="seconds" id="timer">0</div>
+            </div>
+            <div class="time-line"></div>
+        </header>
+        
+        <section>
+            <div class="question"></div>
+            <div class="answers"></div>
+        </section>
+        
+        <footer>
+            <div class="question-count"></div>
+            <button class="next">Next Question</button>
+        </footer>
+    </main>
+    
+    <section class="results">
+        <div class="display"></div>
+
+        <div class="complete">The Quiz is over now!</div>
+        <div class="score"></div>
+        <div class="buttons">
+            <button class="exit">End Quiz</button>
+        </div>
+    </section>
+
+
+    <script src="./assets/js/script.js"></script>    
+</body>
+</html>
