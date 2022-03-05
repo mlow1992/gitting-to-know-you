@@ -14,7 +14,6 @@ body {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    /* box-shadow: darkblue; */
 }
 
 .start-btn button {
@@ -44,7 +43,6 @@ body {
     transform: translate(-50%, -50%);
     opacity: 0;
     pointer-events: none;
-    transition: all 0.3 ease;
 }
 
 .info-container .quiz-info {
@@ -88,7 +86,6 @@ body {
     outline: none;
     border-radius: 5px;
     border: 1px solid plum;
-    transition: all 0.3s ease;
 }
 
 .info-container .buttons .exit {
@@ -108,7 +105,6 @@ body {
     transform: translate(-50%, -50%) scale(0.9);
     opacity: 0;
     pointer-events: none;
-    transition: all 0.3s ease;
 }
 
 .quiz header {
@@ -121,7 +117,6 @@ body {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    /* box-shadow: ; */
 }
 
 .quiz header .title {
@@ -193,7 +188,6 @@ section .answers .answer {
     font-size: 17px;
     margin-bottom: 15px;
     cursor: pointer;
-    transition: all 0.3s ease;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -274,7 +268,6 @@ footer button.show {
     transform: translate(-50%, 50%) scale(0.9);
     opacity: 0;
     pointer-events: none;
-    transition: all 0.3s ease;
 }
 
 .results .complete {

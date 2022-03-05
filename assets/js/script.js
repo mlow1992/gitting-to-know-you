@@ -149,7 +149,7 @@ function answerChosen(answer) {
         console.log("Wrong Answer!")
         for (i = 0; i < allAnswers; i++) {
             if (answerList.children[i].textContent == correctAns) {
-                answerList.children[i].setAttribute("class", "correct option");
+                answerList.children[i].classList.add("correct");
                 answerList.children[i].insertAdjacentHTML("beforeend", checkIconTag);
             }
         }
