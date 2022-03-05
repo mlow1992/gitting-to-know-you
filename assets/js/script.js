@@ -2,61 +2,61 @@ let questions = [
     {
     number: 1,
     question: "What is the best sandwich?",
-    answers: {
-        a: "Tuna",
-        b: "Hot Dog",
-        c: "PB&J",
-        d: "Grilled Cheese"
-    },
-    correctAnswer: "c"
+    answers: [
+        "Tuna",
+        "Hot Dog",
+        "PB&J",
+        "Grilled Cheese"
+    ],
+    correctAnswer: "PB&J"
     },
     {
     number: 2,
     question: "The zombie apocalypse has started. What do you grab first?",
-    answers: {
-        a: "Shotgun. I'm about to have a blast.",
-        b: "My best pair of sneakers. I can outrun these shambling SoBs.",
-        c: "Katana. Wait, why do I have a katana just lying around?",
-        d: "Food and water. Time to start building my resource empire."
-    },
-    correctAnswer: "a"
+    answers: [
+        "Shotgun. I'm about to have a blast.",
+        "My best pair of sneakers. I can outrun these shambling SoBs.",
+        "Katana. Wait, why do I have a katana just lying around?",
+        "Food and water. Time to start building my resource empire."
+    ],
+    correctAnswer: "Shotgun. I'm about to have a blast."
     },
     {
     number: 3,
     question: "What is the best pet?",
-    answers: {
-        a: "Dog. Woof",
-        b: "Cat. Meow",
-        c: "Fish. Glub Glub",
-        d: "Anything. All animals deserve a loving home."
-    },
-    correctAnswer: "d"
+    answers: [
+        "Dog. Woof",
+        "Cat. Meow",
+        "Fish. Glub Glub",
+        "Anything. All animals deserve a loving home."
+    ],
+    correctAnswer: "Anything. All animals deserve a loving home."
     },
     {
     number: 4,
     question: "If you could have a superpower, what would it be?",
-    answers: {
-        a: "Communication with animals. See previous question.",
-        b: "Super strength. I've always wanted to lift a bus.",
-        c: "Super speed. I'll never be late to work again!",
-        d: "Flight. I want to feel the wind in my hair and the bugs in my face."
-    },
-    correctAnswer: "a"
+    answers: [
+        "Communication with animals. See previous question.",
+        "Super strength. I've always wanted to lift a bus.",
+        "Super speed. I'll never be late to work again!",
+        "Flight. I want to feel the wind in my hair and the bugs in my face."
+    ],
+    correctAnswer: "Communication with animals. See previous question."
     },
     {
     number: 5,
     question: "What is the best holiday?",
-    answers: {
-        a: "St. Patrick's Day. Guinness and Shepherd's Pie.",
-        b: "Any holiday that people give me chocolate",
-        c: "Thanksgiving. I love group arguments followed by group nap time.",
-        d: "Halloween. My parents were right. I CAN be whatever I want!"
-    },
-    correctAnswer: "b"
+    answers: [
+        "St. Patrick's Day. Guinness and Shepherd's Pie.",
+        "Any holiday that people give me chocolate",
+        "Thanksgiving. I love group arguments followed by group nap time.",
+        "Halloween. My parents were right. I CAN be whatever I want!"
+    ],
+    correctAnswer: "Any holiday that people give me chocolate"
     }
 ];
 
-const startBtn = document.querySelector("#start-btn");
+const startBtn = document.querySelector(".start-btn");
 const quizInfo = document.querySelector(".info-container");
 const exitBtn = quizInfo.querySelector(".buttons .exit");
 const contBtn = quizInfo.querySelector(".buttons .begin");
@@ -123,8 +123,88 @@ function showQuestions(index) {
     question.innerHTML = questionTag;
     answerList.innerHTML = answerTag;
 
-    const answer = answerList.querySelectorAll(".answers");
+    const answer = answerList.querySelectorAll(".answer");
     for (i = 0; i < answer.length; i++) {
-        answer[i].setAttribute("onclick", "optionSelected(this)");
+        answer[i].setAttribute("onclick", "answerChosen(this)");
     }
+}
+
+let checkIconTag = '<div class="check-mark"><i class="fa-solid fa-check"></i></div>'
+let xIconTag = '<div class="x-mark"><i class="fa-solid fa-xmark"></i></div>'
+
+function answerChosen(answer) {
+    let userAnswer = answer.textContent;
+    let correctAns = questions[questionCount].correctAnswer;
+    const allAnswers = answerList.children.length;
+
+    if (userAnswer == correctAns) {
+        score += 1;
+        answer.classList.add("correct");
+        answer.insertAdjacentHTML("beforeend", checkIconTag);
+        console.log("Correct!")
+    } else {
+        answer.classList.add("incorrect");
+        answer.insertAdjacentHTML("beforeend", xIconTag);
+        fullTime -= 10;
+        console.log("Wrong Answer!")
+        for (i = 0; i < allAnswers; i++) {
+            if (answerList.children[i].textContent == correctAns) {
+                answerList.children[i].setAttribute("class", "correct option");
+                answerList.children[i].insertAdjacentHTML("beforeend", checkIconTag);
+            }
+        }
+    }
+
+    for (i = 0; i < allAnswers; i++) {
+        answerList.children[i].classList.add("disabled");
+    }
+
+    nextBtn.classList.add("show");
+}
+
+function showResult() {
+    quizInfo.classList.remove("infoActive");
+    quiz.classList.remove("quizActive");
+    results.classList.add("resultsActive");
+    const scoreText = results.querySelector(".score");
+    if (score > 3) {
+        let scoreTag = '<span>Great job! You got <p>' + score + '</p> correct!</span>';
+        scoreText.innerHTML = scoreTag;
+    } else if (score > 1) {
+        let scoreTag = '<span>Decent work! You got <p>' + score + '</p> correct!</span>';
+        scoreText.innerHTML = scoreTag;
+    } else {
+        let scoreTag = '<span> You get nothing! You lose! Good DAY sir!</span>'
+        scoreText.innerHTML = scoreTag;
+    }
+}
+
+function startTime() {
+    setInterval(function () {
+        if (fullTime <= 0) {
+            clearInterval();
+            document.getElementById('timer').innerHTML = '0';
+            showResult();
+        } else {
+            document.getElementById('timer').innerHTML = fullTime;
+        }
+        fullTime -= 1;
+    }, 1000);
+}
+
+function startTimeLine(time) {
+    counterLine = setInterval(timer, 60);
+    function timer() {
+        time += 0.57;
+        timeLine.style.width = time + "px";
+        if(time > 549) {
+            clearInterval(counterLine);
+        }
+    }
+}
+
+function questionCounter(index) {
+    
+    let totalQuestionCounterTag = '<span><p>' + index + '</p> of <p>' + questions.length + '</p> Questions</span>';
+    questCount.innerHTML = totalQuestionCounterTag;
 }
